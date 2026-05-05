@@ -1,0 +1,25 @@
+[Unit]
+Description=Kernell Pay - Shadow Mode Runner
+After=network.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/opt/kernell-os
+ExecStart=/opt/kernell-os/kernell_sdk/scripts/shadow_runner.sh
+Restart=on-failure
+RestartSec=5
+StartLimitIntervalSec=60
+StartLimitBurst=3
+StartLimitAction=none
+
+# Environment
+Environment=PYTHONUNBUFFERED=1
+Environment=KERNELL_ENV=production
+
+# Logging
+StandardOutput=append:/var/log/kernell/shadow_mode_out.log
+StandardError=append:/var/log/kernell/shadow_mode_err.log
+
+[Install]
+WantedBy=multi-user.target

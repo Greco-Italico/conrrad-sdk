@@ -1,0 +1,9 @@
+{
+  "gpt-4o|4|4": {
+    "samples": 1,
+    "avg_error": 1.4,
+    "kill_rate": 0.1,
+    "drift_anomaly_rate": 0.1,
+    "last_updated": 1777944050.0983288
+  }
+}

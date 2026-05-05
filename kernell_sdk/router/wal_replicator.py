@@ -14,22 +14,23 @@ import hashlib
 from typing import Optional, Dict
 
 
-def compute_event_id(request_id: str, epoch: int, event_type: str, ts: float) -> str:
+def compute_event_id(request_id: str, epoch: int, event_type: str, payload: dict) -> str:
     """CRITICAL: Generates a deterministic global ID for any event."""
     canonical = {
         "request_id": request_id,
         "epoch": epoch,
         "type": event_type,
-        "ts": round(ts, 6)
+        "payload": payload
     }
-    return hashlib.sha256(json.dumps(canonical, sort_keys=True).encode()).hexdigest()
+    return hashlib.sha256(json.dumps(canonical, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
 
 def compute_event_id_from_dict(event: dict) -> str:
+    payload = {k: v for k, v in event.items() if k not in ("request_id", "epoch", "type", "ts", "_replicated_from", "_replicated_at")}
     return compute_event_id(
         request_id=event.get("request_id", ""),
         epoch=event.get("epoch", 0),
         event_type=event.get("type", "UNKNOWN"),
-        ts=event.get("ts", 0.0)
+        payload=payload
     )
 
 def get_home_region(request_id: str) -> str:

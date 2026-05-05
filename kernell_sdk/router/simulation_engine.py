@@ -19,11 +19,11 @@ class ExecutionFingerprint:
             {
                 "type": h["type"],
                 "epoch": h["epoch"],
-                "ts": round(h["ts"], 6)  # evitar ruido float
+                "payload": h.get("payload", {})
             }
             for h in history
         ]
-        serialized = json.dumps(canonical, sort_keys=True)
+        serialized = json.dumps(canonical, sort_keys=True, separators=(',', ':'))
         return hashlib.sha256(serialized.encode()).hexdigest()
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -31,15 +31,16 @@ class ExecutionFingerprint:
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 class NormalizedEvent:
-    def __init__(self, request_id: str, epoch: int, event_type: str, ts: float, payload: Dict[str, Any]):
+    def __init__(self, request_id: str, epoch: int, event_type: str, ts: float, payload: Dict[str, Any], seq_id: str = ""):
         self.request_id = request_id
         self.epoch = epoch
         self.type = event_type
         self.ts = ts
         self.payload = payload
+        self.seq_id = seq_id
 
     def __repr__(self):
-        return f"<Event {self.type} ts={self.ts} epoch={self.epoch} req={self.request_id}>"
+        return f"<Event {self.type} seq={self.seq_id} epoch={self.epoch} req={self.request_id}>"
 
 
 class WALEventAdapter:
@@ -57,13 +58,14 @@ class WALEventAdapter:
         if req_id.startswith("kernell:exec:"):
             req_id = req_id.split("kernell:exec:")[1]
             
-        event_type = data.get("event") or data.get("state_after")
+        event_type = data.get("event") or data.get("type") or data.get("state_after")
         return NormalizedEvent(
             request_id=req_id,
             epoch=int(data.get("epoch", 0)),
             event_type=event_type,
-            ts=float(data["ts"]),
-            payload=data
+            ts=float(data.get("ts", 0.0)),
+            payload=data,
+            seq_id=eid
         )
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -178,7 +180,7 @@ class SimulationState:
         current["history"].append({
             "type": event.type,
             "epoch": event.epoch,
-            "ts": event.ts
+            "payload": event.payload
         })
 
         self.executions[rid] = current
@@ -199,7 +201,7 @@ class SimulationEngine:
         self.clock = SimulationClock()
         self.scheduler = DeterministicScheduler()
         self.state = SimulationState()
-        self.events = sorted(events, key=lambda e: e.ts)
+        self.events = sorted(events, key=lambda e: (e.epoch, e.seq_id))
         self._ptr = 0
         self.timeline: List[TimelineFrame] = []
 
