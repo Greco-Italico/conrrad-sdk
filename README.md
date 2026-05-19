@@ -1,8 +1,24 @@
-# KAP Escrow
+# conrrad-sdk (open-core)
 
-**The missing financial protection layer for the AI agent economy.**
+> **Repository honesty:** This tree contains **legacy technical modules** (`kernell_sdk/`), the **KAP escrow protocol** (`kap_escrow/`, `kap_core`), and coordination/agent infrastructure. Package names (`kernell_sdk`, `kap-escrow`) are **stable** until a shim migration (Fase B).
+>
+> **CONRRAD Runtime Preview** (human continuity, Observatory, Gate 9h, Monaco lifecycle) lives in the separate private repo **[Greco-Italico/conrrad](https://github.com/Greco-Italico/conrrad)** — start with `docs/AUDITOR_ONBOARDING.md` there.
+>
+> **Externally:** brand **CONRRAD** + **conrrad-sdk** only. Harlemm, Sully, KAP = internal implementation planes.
 
-KAP Escrow plugs into the standard A2A/AP2/x402 stack as a trustless escrow extension. It solves the one problem nobody else has: *what happens to the money when an agent fails to deliver?*
+| Module | Role |
+|--------|------|
+| `kernell_sdk/` | Agents, router, runtime adapters (legacy import path) |
+| `kap_escrow/` | A2A/AP2 escrow extension (pip: `kap-escrow`) |
+| `core/` | 🔒 Frozen causal plane — see Freeze Protocol in conrrad `docs/` |
+
+**Not claimed here:** production-ready autonomous OS · Cursor replacement · Gate 9h human certification (that evidence is in `conrrad`).
+
+---
+
+# KAP Escrow (technical module)
+
+**Trustless escrow extension for the A2A/AP2/x402 stack** — *what happens to the funds when an agent fails to deliver?*
 
 ## Where KAP fits
 

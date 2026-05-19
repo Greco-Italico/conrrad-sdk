@@ -70,6 +70,7 @@ impl RustEscrowEngine {
         record.set_item("to", agent)?;
         record.set_item("amount", amount)?;
         record.set_item("memo", memo_str)?;
+        record.set_item("origin", agent)?;
         
         self.append_tx(py, record)?;
 
@@ -95,26 +96,33 @@ impl RustEscrowEngine {
 
     fn append_tx(&mut self, py: Python, record: &PyDict) -> PyResult<()> {
         let ts = SystemTime::now().duration_since(UNIX_EPOCH).unwrap().as_secs_f64();
-        record.set_item("ts", ts)?;
+        let uuid_module = py.import("uuid")?;
         
-        if !record.contains("tx_id")? {
-            let uuid_module = py.import("uuid")?;
-            let tx_id_obj = uuid_module.call_method0("uuid4")?;
-            let str_obj = tx_id_obj.call_method0("__str__")?;
-            let tx_id: String = str_obj.extract()?;
-            record.set_item("tx_id", tx_id)?;
-        }
-        
-        let tx_id: String = record.get_item("tx_id")?.unwrap().extract()?;
-        
-        if !self.check_nonce(py, &tx_id)? {
+        let event_id: String = uuid_module.call_method0("uuid4")?.call_method0("__str__")?.extract()?;
+        let trace_id: String = if record.contains("trace_id")? { record.get_item("trace_id")?.unwrap().extract()? } else { uuid_module.call_method0("uuid4")?.call_method0("__str__")?.extract()? };
+        let span_id: String = uuid_module.call_method0("uuid4")?.call_method0("__str__")?.extract()?;
+        let origin: String = if record.contains("origin")? { record.get_item("origin")?.unwrap().extract()? } else { "node://unknown".to_string() };
+        let event_type: String = record.get_item("type")?.unwrap().extract()?;
+
+        let envelope = PyDict::new(py);
+        envelope.set_item("event_id", event_id)?;
+        envelope.set_item("trace_id", &trace_id)?;
+        envelope.set_item("span_id", span_id)?;
+        envelope.set_item("timestamp", ts)?;
+        envelope.set_item("runtime", "node://escrow-engine")?;
+        envelope.set_item("origin", origin)?;
+        envelope.set_item("event_type", format!("escrow.{}.event", event_type))?;
+        envelope.set_item("version", 1)?;
+        envelope.set_item("payload", record)?;
+
+        if !self.check_nonce(py, &trace_id)? {
             return Ok(());
         }
 
         if !self.signing_key.is_empty() {
             let json_module = py.import("json")?;
             let clean = PyDict::new(py);
-            for (k, v) in record.iter() {
+            for (k, v) in envelope.iter() {
                 let key_str: String = k.extract()?;
                 if key_str != "sig" {
                     clean.set_item(k, v)?;
@@ -131,18 +139,19 @@ impl RustEscrowEngine {
             let result = mac.finalize();
             let sig_hex = hex::encode(result.into_bytes());
             
-            record.set_item("sig", sig_hex)?;
+            envelope.set_item("sig", sig_hex)?;
         }
 
-        self.wal.append(py, record)?;
+        self.wal.append(py, envelope)?;
         
         let tx_log = format!("{}:tx_log", self.prefix);
         let json_module = py.import("json")?;
-        let json_str: String = json_module.call_method1("dumps", (record,))?.extract()?;
+        let json_str: String = json_module.call_method1("dumps", (envelope,))?.extract()?;
         
         let pipe = self.redis_client.call_method0(py, "pipeline")?;
-        pipe.call_method1(py, "lpush", (&tx_log, json_str))?;
+        pipe.call_method1(py, "lpush", (&tx_log, &json_str))?;
         pipe.call_method1(py, "ltrim", (&tx_log, 0, 999))?;
+        pipe.call_method1(py, "publish", ("kernell:events", &json_str))?; // Enterprise Event Bus
         pipe.call_method0(py, "execute")?;
 
         Ok(())

@@ -46,17 +46,6 @@ class ExecutionLedgerEntry:
     status: str
     duration_ms: int
     error: Optional[str] = None
-    
-    # Cognitive Governance Extensions
-    execution_policy: Optional[str] = None
-    cognitive_reward: Optional[float] = None
-    risk_score: Optional[float] = None
-    drift_score: Optional[float] = None
-    latency_ms: Optional[float] = None
-    model_route: Optional[str] = None
-    adapter_stack: Optional[str] = None # JSON string
-    snapshot_id: Optional[str] = None
-    trace_id: Optional[str] = None
 
 
 class InMemoryLedger:
@@ -291,16 +280,6 @@ class ExecutionManager:
                             status=status,
                             duration_ms=duration_ms,
                             error=error,
-                            # Extract cognitive state if present in task/usage
-                            execution_policy=task.get("execution_policy"),
-                            cognitive_reward=usage.get("cognitive_reward"),
-                            risk_score=usage.get("risk_score") or (getattr(risk, "risk_score", None) if 'risk' in dir() else None),
-                            drift_score=usage.get("drift_score"),
-                            latency_ms=usage.get("latency_ms") or float(duration_ms),
-                            model_route=usage.get("model_route"),
-                            adapter_stack=task.get("adapter_stack"),
-                            snapshot_id=task.get("snapshot_id") or usage.get("snapshot_id"),
-                            trace_id=task.get("trace_id") or usage.get("trace_id"),
                         )
                     )
 

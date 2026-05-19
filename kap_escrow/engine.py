@@ -185,6 +185,19 @@ class EscrowEngine:
         if self.private_key:
             sign_tx(record, self.private_key)
 
+        # ── Formal Event Envelope (Constitutional: Art. I.1 Event Primacy) ──
+        envelope = {
+            "event_id": str(uuid.uuid4()),
+            "trace_id": record.get("tx_id", str(uuid.uuid4())),
+            "span_id": str(uuid.uuid4()),
+            "timestamp": record["ts"],
+            "runtime": "node://escrow-engine",
+            "origin": record.get("from", record.get("to", "node://unknown")),
+            "event_type": f"escrow.{record['type']}.event",
+            "version": 1,
+            "payload": record,
+        }
+
         record["wal_status"] = "PENDING"
         self.wal.append(record)
 
@@ -193,6 +206,7 @@ class EscrowEngine:
             pipe = self.r.pipeline()
             pipe.lpush(tx_log, json.dumps(record))
             pipe.ltrim(tx_log, 0, 999)
+            pipe.publish("kernell:events", json.dumps(envelope))
             pipe.execute()
         except Exception as e:
             logger.error(f"Redis commit failed for tx_id={record['tx_id']}: {e}")
