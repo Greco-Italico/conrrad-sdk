@@ -9,7 +9,7 @@ readme = "README.md"
 license = {text = "MIT"}
 requires-python = ">=3.9"
 authors = [
-    {name = "CONRRAD", email = "protocol@kernell.site"}
+    {name = "CONRRAD", email = "protocol@conrrad.dev"}
 ]
 keywords = [
     "ai", "agents", "escrow", "a2a", "ap2", "merkle", "protocol",
@@ -30,10 +30,10 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://kernell.site"
+Homepage = "https://conrrad.dev"
 Repository = "https://github.com/Greco-Italico/conrrad-sdk"
-Documentation = "https://kernell.site/nexus"
-"Bug Tracker" = "https://github.com/Greco-Italico/kernell-sdk/issues"
+Documentation = "https://conrrad.dev/docs"
+"Bug Tracker" = "https://github.com/Greco-Italico/conrrad-sdk/issues"
 
 [tool.maturin]
 features = ["pyo3/extension-module"]
