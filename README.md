@@ -2,7 +2,7 @@
 
 > **Repository honesty:** This tree contains **legacy technical modules** (`kernell_sdk/`), the **KAP escrow protocol** (`kap_escrow/`, `kap_core`), and coordination/agent infrastructure. Package names (`kernell_sdk`, `kap-escrow`) are **stable** until a shim migration (Fase B).
 >
-> **CONRRAD Runtime Preview** (human continuity, Observatory, Gate 9h, Monaco lifecycle) lives in the separate private repo **[Greco-Italico/conrrad](https://github.com/Greco-Italico/conrrad)** — start with `docs/AUDITOR_ONBOARDING.md` there.
+> **CONRRAD Runtime Preview** (human continuity, Observatory, Gate 9h, Monaco lifecycle) lives in the separate private repo **[Greco-Italico/conrrad](https://github.com/Greco-Italico/conrrad)** — auditor entry: `docs/AUDITOR_ONBOARDING.md` → **`docs/AUDITOR_BLIND_SPOTS.md`** (what is *not* in GitHub) → `docs/CONRRAD_SESSION.md` §21 (`conrrad_session/`).
 >
 > **Externally:** brand **CONRRAD** + **conrrad-sdk** only. Harlemm, Sully, KAP = internal implementation planes.
 
