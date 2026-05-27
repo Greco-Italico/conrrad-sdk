@@ -313,6 +313,20 @@ More developers entering the ecosystem
 
 ---
 
+## Open core (this repo)
+
+This public repository is a **limited SDK surface** — not the constitutional runtime.
+
+| In this repo (public) | In private core (not here) |
+|------------------------|----------------------------|
+| Adapter examples, KAP escrow spec | Full verify/replay engine |
+| Habitat bootstrap docs | HARLEMM heuristics & routing |
+| Protocol sketches | Telemetry corpora, settlement engine |
+
+Policy: [OPEN_CORE_STRATEGY](https://github.com/Greco-Italico/conrrad/blob/main/docs/OPEN_CORE_STRATEGY.md) (private repo doc; mirror when public-docs repo exists).
+
+---
+
 ## What CONRRAD Is Not
 
 CONRRAD is not:
@@ -322,6 +336,7 @@ CONRRAD is not:
 - “vector database = continuity”
 - another orchestration wrapper
 - speculative AI token infrastructure
+- “fully open source” constitutional runtime
 - AGI marketing
 
 ---
