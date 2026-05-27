@@ -1,125 +1,119 @@
-# conrrad-sdk (open-core)
+# CONRRAD SDK
 
-> **Repository honesty:** This tree contains **legacy technical modules** (`kernell_sdk/`), the **KAP escrow protocol** (`kap_escrow/`, `kap_core`), and coordination/agent infrastructure. Package names (`kernell_sdk`, `kap-escrow`) are **stable** until a shim migration (Fase B).
->
-> **CONRRAD Runtime Preview** lives in private repo **[Greco-Italico/conrrad](https://github.com/Greco-Italico/conrrad)** — auditors with only ZIPs: open **`docs/CONRRAD_A2_MASTER_AUDITOR_HANDOFF.md`** in conrrad (not this SDK tree).
->
-> **Externally:** brand **CONRRAD** + **conrrad-sdk** only. Harlemm, Sully, KAP = internal implementation planes.
+**Website:** `https://conrrad.online`  
+**Core runtime + evidence repo:** `https://github.com/Greco-Italico/conrrad`  
 
-| Module | Role |
-|--------|------|
-| `kernell_sdk/` | Agents, router, runtime adapters (legacy import path) |
-| `kap_escrow/` | A2A/AP2 escrow extension (pip: `kap-escrow`) |
-| `core/` | 🔒 Frozen causal plane — see Freeze Protocol in conrrad `docs/` |
+CONRRAD is a **sovereign operational runtime** for **verifiable AI continuity**.
 
-**Not claimed here:** production-ready autonomous OS · Cursor replacement · Gate 9h human certification (that evidence is in `conrrad`).
+Most AI systems optimize for **capability** (demos, prompts, tools).  
+CONRRAD optimizes for **operational truth**: replayable causality, mutation governance, epoch mortality, and honest degradation.
+
+> The system may degrade. The goal is to make silent fabrication **detectable, governable, and replayable** — not to promise perfection.
 
 ---
 
-# KAP Escrow (technical module)
+## What makes CONRRAD different
 
-**Trustless escrow extension for the A2A/AP2/x402 stack** — *what happens to the funds when an agent fails to deliver?*
+| Typical AI runtime | CONRRAD |
+|---|---|
+| memory-centric | **replay-centric** |
+| narrative continuity | **causal continuity** |
+| tool success = assumed truth | **verify + replay required** |
+| mutable / hidden history | **append-only lineage** |
+| hidden degradation | **degraded-but-honest** |
+| orchestration-first | **constitutional-first** |
 
-## Where KAP fits
+---
 
-```
-┌─────────────────────────────────────────────┐
-│           Your Agent Stack                  │
-├─────────────┬───────────┬───────────────────┤
-│    A2A      │    MCP    │  AP2 (auth)       │
-│  (coord.)   │  (tools)  │  x402 (settle)    │
-├─────────────┴───────────┴───────────────────┤
-│     🔒 KAP Escrow (financial protection)    │
-│   Lock → Execute → Verify → Settle/Refund   │
-├─────────────────────────────────────────────┤
-│       Solana / Ethereum (on-chain)          │
-└─────────────────────────────────────────────┘
-```
+## Evidence (not claims)
 
-## Install
+Most projects show curated demos. CONRRAD is built around **longitudinal operational evidence**.
 
-```bash
-pip install kap-escrow
-```
+Evidence is expected to be **reconstructible** from:
 
-## Quick Start
+- **RuntimeBlock verification** (integrity + chain links)
+- **Deterministic replay** (reconstruct what happened)
+- **Mutation lifecycle** (requested → evaluated → policy → executed → post-validated → sealed)
+- **Epoch semantics** (restart mortality; no silent continuity)
+- **Honest degradation** (confidence + narrative collapse toward evidence)
 
-```python
-import redis
-import nacl.signing
-from kap_escrow import EscrowEngine
+CONRRAD does not assume operational truth from narrative, memory, or tool success.
+It attempts to **bound continuity claims** to replayable and verifiable evidence.
 
-r = redis.Redis()
-# Ed25519 seed is required in version 1.1.0+ for Asymmetric Verification
-private_seed = nacl.signing.SigningKey.generate().encode()
-engine = EscrowEngine(r, private_key=private_seed)
+If it cannot be replayed, it cannot be operationally trusted.  
+If it cannot be verified, it cannot govern continuity.
 
-# Fund agents
-engine.credit("agent_a", 1000.0)
+### What you can verify today (from the runtime repo)
 
-# Lock 100 tokens for a contract
-ok, msg = engine.lock("agent_a", 100.0, "contract_001")
+From `Greco-Italico/conrrad` (Observatory running):
 
-# Agent B delivers... then settle:
-ok, tx_id = engine.settle("contract_001", "agent_b", 95.0)
-# Agent B receives 94.05 (after 1% burn)
-# Agent A gets 5.0 refund
-```
+- `GET /api/runtime/blocks/verify` — chain integrity
+- `GET /api/runtime/blocks/replay` — reconstruction trail
+- `POST /api/git/*` is expected to be blocked (authority enforcement)
+- `POST /api/mutations/orchestrate` is the mutation SSOT
 
-## A2A Agent Card Integration
+Key specs:
 
-```python
-from kap_escrow import AgentCard, validate_agent_card
+- RuntimeBlock spec: `docs/RUNTIME_BLOCK_V1_SPEC.md`
+- Replay theorem: `docs/REPLAY_SUPREMACY_THEOREM.md`
+- Mutation canon: `docs/MUTATION_LIFECYCLE_CANON.md`
+- Epoch canon: `docs/EPOCH_SEMANTICS_CANON.md`
+- Truth hierarchy: `docs/TRUTH_HIERARCHY.md`
+- Integrity gaps playbook: `docs/INTEGRITY_GAP_PLAYBOOK.md`
 
-# Parse a standard A2A Agent Card
-card = AgentCard.from_dict({
-    "name": "DataAnalyzer",
-    "url": "https://api.example.com/agent",
-    "capabilities": ["sentiment_analysis", "summarization"],
-})
+---
 
-valid, err = validate_agent_card(card)
-agent_id = card.agent_id  # deterministic SHA-256 ID
+## What “install” means
 
-engine.credit(agent_id, 500.0)
-```
+This SDK is not “a library wrapper”.
 
-## AP2 Mandate Integration
+`conrrad install` is a **sovereign habitat genesis ceremony**:
 
-```python
-from kap_escrow import Mandate, escrow_from_mandate
+- creates habitat identity (`habitat_id`, `passport_id`)
+- seeds a genesis RuntimeBlock
+- establishes signing authority for sealing
+- mounts constitutional mutation authority gates
+- ensures verify + replay readiness
 
-# User authorizes agent to spend up to 200 tokens
-mandate = Mandate(
-    mandate_id="M-001",
-    payer_id="user_wallet_abc",
-    agent_id="agent_b",
-    service_type="code_review",
-    max_amount=200.0,
-)
+Contract: `docs/CONRRAD_SDK_INSTALL_CONTRACT.md` (in the runtime repo).
 
-# Auto-lock escrow from mandate (respects budget ceiling)
-ok, msg = escrow_from_mandate(engine, mandate, amount=150.0)
-```
+**Important:** this does not eliminate deception or drift. It makes them **observable** and gives the system a place to record and govern them.
 
-## Security Architecture
+---
 
-| Layer | Protection |
-|-------|-----------|
-| **TX Signing** | Ed25519 Asymmetric Encryption, Rotatory Keyrings |
-| **Anti-Replay** | 48h nonce window, auto-cleanup via Lua |
-| **Crash Recovery** | WAL with fsync + Threading Protection |
-| **Atomicity** | Pessimistic Lua execution (>600 TPS capability) |
-| **Batch Anchoring** | Merkle tree, prefix-protected (CVE-2012-2459 mitigated) |
-| **Burn Mechanism** | Configurable %, Auditable JSON Event Stream |
+## Who this is for
 
-## Why KAP instead of building your own?
+CONRRAD is for teams building long-running autonomous systems that must be:
 
-- **AP2** handles authorization but has no escrow
-- **x402** handles micropayments but has no refund protection
-- **ERC-8004** handles identity but doesn't move money
-- **KAP** is the glue: lock → verify → settle OR refund
+- auditable
+- replayable
+- governable under failure
+- safe under restarts and drift
 
-## License
+This includes enterprise automation, financial execution systems, regulated workflows, and safety-critical agentic infrastructure.
 
-MIT — Built by [Kernell](https://kernell.site)
+---
+
+## Roadmap (evidence-first)
+
+- **P0 / P0.7:** constitutional primitives + longitudinal integrity evidence  
+- **P1:** federation + cross-habitat trust negotiation  
+- **P2:** verification economics (proof-of-integrity receipts, metered verification)  
+
+---
+
+## Non-goals (what CONRRAD is not)
+
+- not “another AI IDE”
+- not “vector memory = truth”
+- not “tool success = integrity”
+- not “AGI platform” marketing
+
+---
+
+## Next steps
+
+1. Read the doctrine/specs in the runtime repo (`Greco-Italico/conrrad` → `docs/CONSTITUTION_INDEX.md`).  
+2. Run Observatory locally and inspect `verify` + `replay`.  
+3. Evaluate degraded-but-honest behavior under restart + mutation pressure.
+
