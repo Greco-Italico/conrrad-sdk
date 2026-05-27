@@ -1,119 +1,371 @@
-# CONRRAD SDK
+# README público (visión completa)
 
-**Website:** `https://conrrad.online`  
-**Core runtime + evidence repo:** `https://github.com/Greco-Italico/conrrad`  
+# CONRRAD
+Sovereign Operational Infrastructure for Verifiable Autonomous Systems
 
-CONRRAD is a **sovereign operational runtime** for **verifiable AI continuity**.
+🌐 **Website:** `https://conrrad.online`  
+🧠 **Core Runtime
 
-Most AI systems optimize for **capability** (demos, prompts, tools).  
-CONRRAD optimizes for **operational truth**: replayable causality, mutation governance, epoch mortality, and honest degradation.
+📄 **Infrastructure thesis:** https://github.com/Greco-Italico/conrrad/blob/main/docs/CONRRAD_THESIS.md + Evidence Repository:** `https://github.com/Greco-Italico/conrrad`
 
-> The system may degrade. The goal is to make silent fabrication **detectable, governable, and replayable** — not to promise perfection.
+## What is CONRRAD?
 
----
+CONRRAD is a **sovereign operational ecosystem** for autonomous systems.
 
-## What makes CONRRAD different
+It combines:
 
-| Typical AI runtime | CONRRAD |
-|---|---|
-| memory-centric | **replay-centric** |
-| narrative continuity | **causal continuity** |
-| tool success = assumed truth | **verify + replay required** |
-| mutable / hidden history | **append-only lineage** |
-| hidden degradation | **degraded-but-honest** |
-| orchestration-first | **constitutional-first** |
+- constitutional runtime governance
+- replayable operational truth
+- economically-aware AI execution
+- local-first survivability
+- autonomous work execution
+- verifiable settlement
+- federation-ready habitats
 
----
+into a single operational environment.
 
-## Evidence (not claims)
+Most AI systems optimize for:
 
-Most projects show curated demos. CONRRAD is built around **longitudinal operational evidence**.
+- capability
+- demos
+- orchestration
+- interface design
 
-Evidence is expected to be **reconstructible** from:
+CONRRAD optimizes for:
 
-- **RuntimeBlock verification** (integrity + chain links)
-- **Deterministic replay** (reconstruct what happened)
-- **Mutation lifecycle** (requested → evaluated → policy → executed → post-validated → sealed)
-- **Epoch semantics** (restart mortality; no silent continuity)
-- **Honest degradation** (confidence + narrative collapse toward evidence)
+- operational truthfulness
+- replayability
+- economic survivability
+- autonomous governance
+- honest degradation under real-world conditions
 
-CONRRAD does not assume operational truth from narrative, memory, or tool success.
-It attempts to **bound continuity claims** to replayable and verifiable evidence.
+## The Core Thesis
 
-If it cannot be replayed, it cannot be operationally trusted.  
-If it cannot be verified, it cannot govern continuity.
+Modern AI systems suffer from structural problems:
 
-### What you can verify today (from the runtime repo)
+- agents fabricate continuity
+- operational history is mutable or opaque
+- memory is treated as truth
+- tool success is assumed to mean correctness
+- AI costs scale uncontrollably
+- autonomous execution lacks accountability
+- marketplaces cannot verify operational integrity
+- systems collapse silently under degradation
 
-From `Greco-Italico/conrrad` (Observatory running):
+CONRRAD exists to solve these problems.
 
-- `GET /api/runtime/blocks/verify` — chain integrity
-- `GET /api/runtime/blocks/replay` — reconstruction trail
-- `POST /api/git/*` is expected to be blocked (authority enforcement)
-- `POST /api/mutations/orchestrate` is the mutation SSOT
+The system may degrade.
 
-Key specs:
+The objective is to make degradation:
 
-- RuntimeBlock spec: `docs/RUNTIME_BLOCK_V1_SPEC.md`
-- Replay theorem: `docs/REPLAY_SUPREMACY_THEOREM.md`
-- Mutation canon: `docs/MUTATION_LIFECYCLE_CANON.md`
-- Epoch canon: `docs/EPOCH_SEMANTICS_CANON.md`
-- Truth hierarchy: `docs/TRUTH_HIERARCHY.md`
-- Integrity gaps playbook: `docs/INTEGRITY_GAP_PLAYBOOK.md`
-
----
-
-## What “install” means
-
-This SDK is not “a library wrapper”.
-
-`conrrad install` is a **sovereign habitat genesis ceremony**:
-
-- creates habitat identity (`habitat_id`, `passport_id`)
-- seeds a genesis RuntimeBlock
-- establishes signing authority for sealing
-- mounts constitutional mutation authority gates
-- ensures verify + replay readiness
-
-Contract: `docs/CONRRAD_SDK_INSTALL_CONTRACT.md` (in the runtime repo).
-
-**Important:** this does not eliminate deception or drift. It makes them **observable** and gives the system a place to record and govern them.
-
----
-
-## Who this is for
-
-CONRRAD is for teams building long-running autonomous systems that must be:
-
-- auditable
+- observable
 - replayable
-- governable under failure
-- safe under restarts and drift
+- governable
+- economically measurable
+- operationally honest
 
-This includes enterprise automation, financial execution systems, regulated workflows, and safety-critical agentic infrastructure.
-
----
-
-## Roadmap (evidence-first)
-
-- **P0 / P0.7:** constitutional primitives + longitudinal integrity evidence  
-- **P1:** federation + cross-habitat trust negotiation  
-- **P2:** verification economics (proof-of-integrity receipts, metered verification)  
+> Important: CONRRAD does **not** claim perfection or impossibility of deception.  
+> It is designed to make deception/drift **detectable, governable, and reconstructible** through evidence.
 
 ---
 
-## Non-goals (what CONRRAD is not)
+## The CONRRAD Ecosystem
 
-- not “another AI IDE”
-- not “vector memory = truth”
-- not “tool success = integrity”
-- not “AGI platform” marketing
+CONRRAD is not a single product.
+
+It is a sovereign operational stack.
+
+### 1) CONRRAD Runtime — Constitutional operational runtime
+
+The Runtime is the causal core of the ecosystem.
+
+It governs:
+
+- RuntimeBlocks
+- replay
+- verify
+- mutation authority
+- epoch semantics
+- lineage
+- continuity confidence
+- degradation semantics
+
+The Runtime establishes:
+
+- replayable operational truth
+- append-only lineage
+- mutation governance
+- restart-aware continuity
+- evidence-bounded recovery
+
+Core principles:
+
+- replay supremacy
+- truthful degradation
+- constitutional mutation authority
+- operational evidence over narrative
+
+### 2) CONRRAD IDE — AI-native sovereign development environment
+
+CONRRAD IDE is the inhabitable surface of the ecosystem.
+
+It is designed to provide:
+
+- modern AI-native development workflows
+- agentic coding assistance
+- terminal orchestration
+- workspace awareness
+- multi-model execution
+- local model integration
+- operational replay awareness
+- cost-conscious routing
+- constitutional execution governance
+
+The goal is not to remove developer control.
+
+The goal is to create environments where:
+
+- operations are observable
+- mutations are governed
+- costs are measurable
+- autonomous execution becomes accountable
+
+### 3) HARLEMM — Hyper-efficient autonomous runtime layer
+
+HARLEMM exists to solve one of the largest structural problems in AI:
+
+**uncontrolled operational cost.**
+
+Most AI tooling continuously escalates inference usage by routing nearly every operation through premium models.
+
+HARLEMM is designed around a different philosophy:
+
+**the environment should understand as much as possible before escalating to expensive inference.**
+
+HARLEMM focuses on:
+
+- local-first survivability
+- operational awareness
+- intelligent routing
+- inference minimization
+- efficiency-aware orchestration
+- constrained hardware execution
+- autonomous operational optimization
+
+The objective is not merely “cheaper AI”.
+
+The objective is sustainable autonomous operation.
+
+Longitudinal efficiency benchmarking is currently underway.
+
+### 4) CONRRAD Marketplace — Autonomous operational work exchange
+
+The Marketplace is an emerging layer where:
+
+- humans
+- agents
+- habitats
+- enterprises
+
+can exchange operational work under verifiable conditions.
+
+Future marketplace operations are designed to support:
+
+- replay-backed execution
+- mutation traceability
+- operational scoring
+- continuity confidence metrics
+- autonomous task execution
+- verifiable settlement
+- evidence-linked reputation
+
+The goal is not gig work with AI wrappers.
+
+The goal is measurable operational trust between autonomous entities.
+
+### 5) CONRRAD PAY — Verification-aware operational settlement
+
+CONRRAD PAY is the operational settlement layer of the ecosystem.
+
+It is designed for:
+
+- execution-linked settlement
+- replay-aware accountability
+- escrow primitives
+- verification receipts
+- mutation-bound operational payment
+- autonomous coordination
+
+The ecosystem token is not designed as a speculative asset.
+
+Its role is functional:
+
+- operational coordination
+- verification metering
+- settlement utility
+- governance signaling
+- ecosystem routing
+
+### 6) Federation Layer — Cross-habitat operational trust
+
+CONRRAD habitats are designed to become sovereign operational entities capable of:
+
+- exchanging proofs
+- negotiating trust
+- validating replayability
+- preserving lineage
+- coordinating under constitutional constraints
+
+Federation primitives are currently in architectural development.
 
 ---
 
-## Next steps
+## Evidence, Not Demos
 
-1. Read the doctrine/specs in the runtime repo (`Greco-Italico/conrrad` → `docs/CONSTITUTION_INDEX.md`).  
-2. Run Observatory locally and inspect `verify` + `replay`.  
-3. Evaluate degraded-but-honest behavior under restart + mutation pressure.
+Most AI systems present:
+
+- demos
+- benchmark screenshots
+- curated workflows
+- isolated examples
+
+CONRRAD is designed around **longitudinal operational evidence**.
+
+Evidence is expected to be reconstructible from:
+
+- RuntimeBlock verification
+- deterministic replay
+- mutation lifecycle reconstruction
+- epoch continuity analysis
+- authority enforcement
+- degradation semantics
+- operational telemetry
+
+Core evidence primitives:
+
+- verify
+- replay
+- mutation lifecycle
+- continuity confidence
+- replay drift detection
+- authority integrity
+- degraded-but-honest behavior
+
+If a claim cannot survive verify + replay, CONRRAD does not treat it as operational truth.
+
+---
+
+## Operational Philosophy
+
+| Traditional AI Systems | CONRRAD |
+|---|---|
+| memory-centric | replay-centric |
+| narrative continuity | causal continuity |
+| orchestration-first | constitutional-first |
+| hidden degradation | degraded-but-honest |
+| mutable operational history | append-only lineage |
+| inference-first | operational-awareness-first |
+| opaque autonomy | measurable autonomy |
+
+---
+
+## The CONRRAD Flywheel
+
+More developers using the IDE  
+↓  
+More operational telemetry  
+↓  
+Better HARLEMM optimization  
+↓  
+Lower inference cost  
+↓  
+Higher survivability  
+↓  
+More autonomous execution  
+↓  
+More operational evidence  
+↓  
+More replay-backed trust  
+↓  
+More habitats federating  
+↓  
+More verifiable economic activity  
+↓  
+More developers entering the ecosystem
+
+---
+
+## Ecosystem Maturity
+
+| Layer | Status |
+|------|--------|
+| Runtime primitives | Active |
+| Verify + replay | Active |
+| Mutation governance | Active |
+| Epoch semantics | Active |
+| Longitudinal evidence harness | Active |
+| IDE integration | Experimental |
+| HARLEMM optimization layer | Experimental |
+| Marketplace architecture | Early architecture |
+| Federation primitives | Research / architecture |
+| Verification economics | Research |
+| Autonomous settlement | Experimental |
+
+---
+
+## What CONRRAD Is Not
+
+CONRRAD is not:
+
+- another AI IDE
+- another memory framework
+- “vector database = continuity”
+- another orchestration wrapper
+- speculative AI token infrastructure
+- AGI marketing
+
+---
+
+## Current Direction
+
+Current focus areas:
+
+- longitudinal survivability testing
+- replay integrity
+- mutation governance hardening
+- operational evidence generation
+- HARLEMM efficiency benchmarking
+- constitutional runtime stabilization
+- autonomous operational accountability
+
+---
+
+## Next Steps
+
+Explore the constitutional runtime repository: `https://github.com/Greco-Italico/conrrad`  
+
+Read the doctrine and specifications: `docs/CONSTITUTION_INDEX.md`  
+
+Run Observatory locally. Inspect:
+
+- verify
+- replay
+- mutation authority
+- degradation behavior
+- replay drift handling
+
+Evaluate operational truth under real conditions.
+
+---
+
+## Final Principle
+
+CONRRAD does not assume autonomous systems are infallible.
+
+It assumes they must become:
+
+- replayable
+- governable
+- economically survivable
+- operationally honest
 
