@@ -17,7 +17,7 @@ class KernellConfig(BaseModel):
     model_config = ConfigDict(env_prefix="KERNELL_")
 
     api_key: str = Field(default_factory=lambda: os.getenv("KERNELL_API_KEY", ""))
-    gateway_url: str = Field(default_factory=lambda: os.getenv("KERNELL_GATEWAY_URL", "https://api.kernell.site"))
+    gateway_url: str = Field(default_factory=lambda: os.getenv("KERNELL_GATEWAY_URL", "https://api.conrrad.online"))
     
     @field_validator("gateway_url")
     @classmethod
@@ -28,13 +28,13 @@ class KernellConfig(BaseModel):
         
         # Producción: SOLO el dominio oficial
         if os.getenv("KERNELL_ENV", "development") == "production":
-            if parsed.hostname != "api.kernell.site":
-                raise ValueError("Production only allows api.kernell.site")
+            if parsed.hostname != "api.conrrad.online":
+                raise ValueError("Production only allows api.conrrad.online")
             if parsed.scheme != "https":
                 raise ValueError("Production requires HTTPS")
         else:
             # Desarrollo: localhost permitido pero documentado
-            allowed_hosts = ["api.kernell.site", "localhost", "127.0.0.1"]
+            allowed_hosts = ["api.conrrad.online", "localhost", "127.0.0.1"]
             if parsed.hostname not in allowed_hosts:
                 raise ValueError(f"SSRF: hostname '{parsed.hostname}' no permitido")
         return v

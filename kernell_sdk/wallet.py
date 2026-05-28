@@ -1,7 +1,7 @@
 """
-Kernell OS SDK — Wallet & M2M Commerce
+CONRRAD SDK — Wallet & M2M Commerce
 ═══════════════════════════════════════
-Handles $KERN payments between agents via the Kernell Agent Protocol (KAP).
+Handles $KERN payments between agents via the CONRRAD Agent Protocol (CAP).
 Agents can receive payments for completed tasks and pay other agents for services.
 
 Usage:
@@ -62,7 +62,7 @@ def _to_decimal(value: Union[float, int, str, Decimal]) -> Decimal:
 
 class Wallet:
     """
-    Handles M2M commerce via the Kernell Agent Protocol (KAP).
+    Handles M2M commerce via the CONRRAD Agent Protocol (CAP).
 
     Each agent has a volatile $KERN wallet for internal transactions.
     """

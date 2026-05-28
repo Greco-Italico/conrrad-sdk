@@ -131,11 +131,11 @@ def serve_wizard():
             <div class="docs-grid">
                 <div class="doc-card">
                     <span style="font-size:24px">🤖</span><br/>
-                    <a href="https://kernell.site/docs/agent" target="_blank">Agent Docs ↗</a>
+                    <a href="https://conrrad.online/docs/agent" target="_blank">Agent Docs ↗</a>
                 </div>
                 <div class="doc-card">
                     <span style="font-size:24px">💳</span><br/>
-                    <a href="https://kernell.site/docs/pay" target="_blank">Kernell Pay Docs ↗</a>
+                    <a href="https://conrrad.online/docs/pay" target="_blank">CONRRAD Pay Docs ↗</a>
                 </div>
             </div>
 

@@ -1,24 +1,35 @@
 """
-KAP Escrow — Trustless Escrow Extension for the A2A Protocol Stack
-===================================================================
-The missing financial protection layer between AP2 (authorization)
-and x402 (settlement).
+KAP Escrow — DEPRECATED: use conrrad_sdk instead.
+===================================================
+This package is a backward-compatible wrapper maintained for
+causal continuity (L2 alias migration).  All real functionality
+lives here but the canonical import path is ``conrrad_sdk``.
 
-  pip install kap-escrow
-
-Plugs into:
-  • A2A Agent Cards (agent discovery & identity)
-  • AP2 Mandates (authorization triggers)
-  • x402 / Solana (settlement rails)
-  • ERC-8004 (reputation publishing)
-
-Core guarantees:
-  • HMAC-SHA256 TX signing (deterministic JSON)
-  • Anti-replay nonces (48h window)
-  • Write-Ahead Log with fsync + chained SHA-256
-  • Atomic WATCH/MULTI/EXEC on all balance mutations
-  • Merkle tree batch anchoring with prefix protection
+Deprecation window: 3–6 months from 2026-05-28.
+Migration guide: docs/migration/KAP_TO_CONRRAD_SDK.md
+Policy: semantic purity is subordinate to causal continuity.
 """
+
+import os as _os
+import warnings as _warnings
+
+# ── Deprecation warning (only when imported directly, not via conrrad_sdk) ──
+if not _os.environ.get("_CONRRAD_SDK_CANONICAL"):
+    _warnings.warn(
+        "kap_escrow is deprecated and will be removed in a future release. "
+        "Use conrrad_sdk instead.  "
+        "See: docs/migration/KAP_TO_CONRRAD_SDK.md",
+        DeprecationWarning,
+        stacklevel=2,
+    )
+    # ── Sunset telemetry ──
+    try:
+        from conrrad_sdk._sunset_telemetry import record_legacy_import
+        record_legacy_import("kap_escrow")
+    except Exception:
+        pass  # telemetry must never break the runtime
+
+# ── Original exports (unchanged — real code stays here) ──
 from kap_escrow.engine import EscrowEngine
 from kap_escrow.merkle import MerkleTree, build_tx_merkle
 from kap_escrow.signing import sign_tx, verify_tx

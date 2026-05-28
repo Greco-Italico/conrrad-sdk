@@ -1,7 +1,7 @@
 """
 EconomicAgent (Client SDK)
 ===========================
-The ultimate abstraction layer for Kernell OS agents.
+The ultimate abstraction layer for CONRRAD agents.
 Turns an AI Agent into a fully autonomous economic actor.
 
 Instead of managing low-level escrows, compliance engines, or cryptography,
@@ -19,9 +19,9 @@ from kernell_sdk.security.ssrf import create_safe_client
 
 
 class EconomicAgent:
-    def __init__(self, passport: AgentPassport, private_key: str, api_url: str = "https://api.kernell.site/v1"):
+    def __init__(self, passport: AgentPassport, private_key: str, api_url: str = "https://api.conrrad.online/v1"):
         """
-        Initializes an Economic Agent capable of transacting natively on the Kernell L2.
+        Initializes an Economic Agent capable of transacting natively on the CONRRAD L2.
         """
         self.passport = passport
         self._private_key = private_key
@@ -107,7 +107,7 @@ class EconomicAgent:
 
     def offer_compute(self, price_per_sec: Decimal, specs: dict):
         """
-        Registers the agent as a Compute Worker on the Kernell Network.
+        Registers the agent as a Compute Worker on the CONRRAD Network.
         This allows 'moneyless' agents to earn KERN by renting their sandbox CPU.
         """
         # Calls the matching engine (future phase)

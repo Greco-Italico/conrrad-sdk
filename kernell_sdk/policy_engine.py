@@ -1,5 +1,5 @@
 """
-Kernell OS SDK — Capability-Based Policy Engine
+CONRRAD SDK — Capability-Based Policy Engine
 ══════════════════════════════════════════════════
 Formal security boundary between LLM suggestions and system execution.
 
@@ -39,7 +39,7 @@ class NetworkPolicy(BaseModel):
     """Controls all outbound network access from the agent container."""
     enabled: bool = False
     allowed_hosts: List[str] = Field(
-        default_factory=lambda: ["api.kernell.site"],
+        default_factory=lambda: ["api.conrrad.online"],
         description="Hostnames the agent is allowed to contact"
     )
     allowed_ports: List[int] = Field(
