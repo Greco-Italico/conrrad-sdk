@@ -5,12 +5,12 @@
 | Resource | URL |
 |----------|-----|
 | Website | https://conrrad.online |
-| Public docs | https://conrrad.online/docs/README.md |
-| Infrastructure thesis | https://conrrad.online/docs/CONRRAD_THESIS.md |
-| Operational inference gate | https://conrrad.online/docs/OPERATIONAL_INFERENCE_GATE.md |
+| Public docs | https://conrrad.online/docs/ |
+| Infrastructure thesis | https://conrrad.online/docs/CONRRAD_THESIS |
+| Operational inference gate | https://conrrad.online/docs/OPERATIONAL_INFERENCE_GATE |
 | This repo | https://github.com/Greco-Italico/conrrad-sdk |
 
-> **Open core:** this repository exposes a **limited** bootstrap surface (KAP escrow spec, client examples). Full runtime, orchestrator, and HARLEMM live in the private `conrrad` implementation.
+> **Open core:** this repository is the **public SDK surface** for CONRRAD (`conrrad-sdk` on PyPI — migrating from legacy `kap-escrow`). Full runtime, orchestrator, and HARLEMM live in the private `conrrad` implementation. Do not use “KAP” or “Kernell” in new public copy.
 
 ---
 
@@ -24,7 +24,7 @@ user → CONRRAD runtime → (replay? primitive? skill? certainty? authority? co
 ```
 
 **Law:** *Inference should be exceptional.*  
-Read: https://conrrad.online/docs/OPERATIONAL_INFERENCE_GATE.md
+Read: https://conrrad.online/docs/OPERATIONAL_INFERENCE_GATE
 
 ---
 
@@ -377,8 +377,9 @@ Current focus areas:
 
 ## Next Steps
 
-The constitutional runtime repository (`Greco-Italico/conrrad`) is a private institutional repository. 
-Access to the doctrine, specifications, and the runtime core is granted via institutional partnership.
+Explore the constitutional runtime repository: `https://github.com/Greco-Italico/conrrad`  
+
+Read the doctrine and specifications: `docs/CONSTITUTION_INDEX.md`  
 
 Run Observatory locally. Inspect:
 
