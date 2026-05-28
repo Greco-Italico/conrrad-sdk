@@ -1,12 +1,32 @@
-# README público (visión completa)
+# CONRRAD SDK (public surface)
 
-# CONRRAD
-Sovereign Operational Infrastructure for Verifiable Autonomous Systems
+**Sovereign operational infrastructure for verifiable autonomous systems.**
 
-🌐 **Website:** `https://conrrad.online`  
-🧠 **Core Runtime
+| Resource | URL |
+|----------|-----|
+| Website | https://conrrad.online |
+| Public docs | https://conrrad.online/docs/ |
+| Infrastructure thesis | https://conrrad.online/docs/CONRRAD_THESIS |
+| Operational inference gate | https://conrrad.online/docs/OPERATIONAL_INFERENCE_GATE |
+| This repo | https://github.com/Greco-Italico/conrrad-sdk |
 
-📄 **Infrastructure thesis:** https://github.com/Greco-Italico/conrrad/blob/main/docs/CONRRAD_THESIS.md + Evidence Repository:** `https://github.com/Greco-Italico/conrrad`
+> **Open core:** this repository exposes a **limited** bootstrap surface (KAP escrow spec, client examples). Full runtime, orchestrator, and HARLEMM live in the private `conrrad` implementation.
+
+---
+
+## Operational inference gate (architectural center)
+
+CONRRAD does **not** treat the LLM as the system. The LLM is a scarce probabilistic coprocessor inside a governed causal runtime.
+
+```text
+user → CONRRAD runtime → (replay? primitive? skill? certainty? authority? continuity? drift?)
+  → ONLY IF NEEDED → LLM → runtime verifies · captures · operationalizes
+```
+
+**Law:** *Inference should be exceptional.*  
+Read: https://conrrad.online/docs/OPERATIONAL_INFERENCE_GATE
+
+---
 
 ## What is CONRRAD?
 
