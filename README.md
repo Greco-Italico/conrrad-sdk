@@ -5,9 +5,9 @@
 | Resource | URL |
 |----------|-----|
 | Website | https://conrrad.online |
-| Public docs | https://conrrad.online/docs/ |
-| Infrastructure thesis | https://conrrad.online/docs/CONRRAD_THESIS |
-| Operational inference gate | https://conrrad.online/docs/OPERATIONAL_INFERENCE_GATE |
+| Public docs | https://conrrad.online/docs/README.md |
+| Infrastructure thesis | https://conrrad.online/docs/CONRRAD_THESIS.md |
+| Operational inference gate | https://conrrad.online/docs/OPERATIONAL_INFERENCE_GATE.md |
 | This repo | https://github.com/Greco-Italico/conrrad-sdk |
 
 > **Open core:** this repository exposes a **limited** bootstrap surface (KAP escrow spec, client examples). Full runtime, orchestrator, and HARLEMM live in the private `conrrad` implementation.
@@ -24,7 +24,7 @@ user → CONRRAD runtime → (replay? primitive? skill? certainty? authority? co
 ```
 
 **Law:** *Inference should be exceptional.*  
-Read: https://conrrad.online/docs/OPERATIONAL_INFERENCE_GATE
+Read: https://conrrad.online/docs/OPERATIONAL_INFERENCE_GATE.md
 
 ---
 
@@ -377,9 +377,8 @@ Current focus areas:
 
 ## Next Steps
 
-Explore the constitutional runtime repository: `https://github.com/Greco-Italico/conrrad`  
-
-Read the doctrine and specifications: `docs/CONSTITUTION_INDEX.md`  
+The constitutional runtime repository (`Greco-Italico/conrrad`) is a private institutional repository. 
+Access to the doctrine, specifications, and the runtime core is granted via institutional partnership.
 
 Run Observatory locally. Inspect:
 
