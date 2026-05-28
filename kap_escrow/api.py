@@ -40,7 +40,7 @@ def _validate_agent_id(agent_id: str) -> str:
 
 # ── App ────────────────────────────────────────────────────────────────
 app = FastAPI(
-    title="Kernell Payments API",
+    title="CONRRAD Payments API",
     description="The financial infrastructure for autonomous agents. FinCEN-grade compliant escrows.",
     version="1.0.0"
 )

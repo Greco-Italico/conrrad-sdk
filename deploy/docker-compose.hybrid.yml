@@ -4,9 +4,9 @@ services:
   postgres:
     image: postgres:15
     environment:
-      POSTGRES_USER: kernell
+      POSTGRES_USER: conrrad
       POSTGRES_PASSWORD: securepassword
-      POSTGRES_DB: kernell
+      POSTGRES_DB: conrrad
     ports:
       - "5432:5432"
     volumes:

@@ -323,7 +323,7 @@ This public repository is a **limited SDK surface** — not the constitutional r
 | Habitat bootstrap docs | HARLEMM heuristics & routing |
 | Protocol sketches | Telemetry corpora, settlement engine |
 
-Policy: [OPEN_CORE_STRATEGY](https://github.com/Greco-Italico/conrrad/blob/main/docs/OPEN_CORE_STRATEGY.md) (private repo doc; mirror when public-docs repo exists).
+Policy: [OPEN_CORE_STRATEGY](https://conrrad.online/docs/OPEN_CORE_STRATEGY.md) · [Institutional access](https://conrrad.online/docs/INSTITUTIONAL_ACCESS.md)
 
 ---
 

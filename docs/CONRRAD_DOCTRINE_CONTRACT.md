@@ -298,7 +298,7 @@ No: "¿se siente correcta?"
 |-------|----------|
 | A2 Habitat (JS) | Implementación autoritativa de este contrato |
 | Python `core/` | Doctrina causal congelada — no bypass |
-| Legacy Kernell | Subordinado; no redefine términos |
+| Legacy runtime | Subordinado; no redefine términos |
 | CONRRAD Pay | Verifica evidencia sellada; no inventa evidencia |
 | SDK install | Ceremonia de génesis — ver [`CONRRAD_SDK_INSTALL_CONTRACT.md`](./CONRRAD_SDK_INSTALL_CONTRACT.md) |
 
