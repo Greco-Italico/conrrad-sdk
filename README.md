@@ -2,14 +2,12 @@
 
 **Sovereign operational infrastructure for verifiable autonomous systems.**
 
-| Resource | URL |
-|----------|-----|
-| Website | https://conrrad.online |
-| **Developer documentation (SSOT)** | [**docs/README.md**](docs/README.md) · [conrrad.online/docs/developer/](https://conrrad.online/docs/developer/) |
-| Public institutional docs | https://conrrad.online/docs/ |
-| Infrastructure thesis | https://conrrad.online/docs/CONRRAD_THESIS |
-| Operational inference gate | https://conrrad.online/docs/OPERATIONAL_INFERENCE_GATE |
-| This repo | https://github.com/Greco-Italico/conrrad-sdk |
+| Resource | Link |
+|----------|------|
+| **Developer documentation (SSOT)** | [`docs/README.md`](docs/README.md) |
+| Doctrine Contract | [`docs/CONRRAD_DOCTRINE_CONTRACT.md`](docs/CONRRAD_DOCTRINE_CONTRACT.md) |
+| Degradation Semantics | [`docs/CONRRAD_DEGRADATION_SEMANTICS.md`](docs/CONRRAD_DEGRADATION_SEMANTICS.md) |
+| This repo | [GitHub](https://github.com/Greco-Italico/conrrad-sdk) |
 
 > **Documentation is operational infrastructure.** SDK changes without doc updates are invalid — see [`docs/DOCS_GOVERNANCE.md`](docs/DOCS_GOVERNANCE.md).
 
@@ -27,7 +25,7 @@ user → CONRRAD runtime → (replay? primitive? skill? certainty? authority? co
 ```
 
 **Law:** *Inference should be exceptional.*  
-Read: https://conrrad.online/docs/OPERATIONAL_INFERENCE_GATE
+Read: [`docs/CONRRAD_DEGRADATION_SEMANTICS.md`](docs/CONRRAD_DEGRADATION_SEMANTICS.md)
 
 ---
 
@@ -346,7 +344,7 @@ This public repository is a **limited SDK surface** — not the constitutional r
 | Habitat bootstrap docs | HARLEMM heuristics & routing |
 | Protocol sketches | Telemetry corpora, settlement engine |
 
-Policy: [OPEN_CORE_STRATEGY](https://conrrad.online/docs/OPEN_CORE_STRATEGY.md) · [Institutional access](https://conrrad.online/docs/INSTITUTIONAL_ACCESS.md)
+Policy: Refer to Institutional Access documentation provided to your organization.
 
 ---
 
@@ -380,17 +378,18 @@ Current focus areas:
 
 ## Next Steps
 
-Explore the constitutional runtime repository: `https://github.com/Greco-Italico/conrrad`  
+Explore the operational semantics and installation contract:
 
-Read the doctrine and specifications: `docs/CONSTITUTION_INDEX.md`  
+- [Installation Contract](docs/CONRRAD_SDK_INSTALL_CONTRACT.md)
+- [Causality Glossary](docs/CAUSALITY_GLOSSARY.md)
 
-Run Observatory locally. Inspect:
+Run the Playground locally to inspect the SDK:
 
-- verify
-- replay
+- [Playground Quickstart](docs/playground/README.md)
+- verify events
+- replay causal history
 - mutation authority
 - degradation behavior
-- replay drift handling
 
 Evaluate operational truth under real conditions.
 
