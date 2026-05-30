@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CONRRAD — Causal walkthrough</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Instrument+Sans:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #06090f;
+      --panel: #0c1219;
+      --border: #1e2a3a;
+      --text: #c8d4e0;
+      --muted: #6b7d8f;
+      --accent: #10b981;
+      --warn: #f59e0b;
+      --reject: #ef4444;
+      --quarantine: #a855f7;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Instrument Sans', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 2rem;
+    }
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin: 0 0 0.25rem;
+    }
+    .sub { color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem; max-width: 52rem; line-height: 1.5; }
+    .layout { display: grid; grid-template-columns: 280px 1fr; gap: 1.5rem; max-width: 1100px; }
+    @media (max-width: 800px) { .layout { grid-template-columns: 1fr; } }
+    .steps { display: flex; flex-direction: column; gap: 0.5rem; }
+    .step-btn {
+      text-align: left;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.85rem;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .step-btn:hover { border-color: var(--accent); }
+    .step-btn.active { border-color: var(--accent); background: #0f1a14; }
+    .viz {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      min-height: 420px;
+    }
+    .flow {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.75rem;
+    }
+    .node {
+      padding: 0.5rem 0.75rem;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: #080c12;
+    }
+    .node.on { border-color: var(--accent); color: var(--accent); }
+    .node.warn { border-color: var(--warn); color: var(--warn); }
+    .node.bad { border-color: var(--reject); color: var(--reject); }
+    .arrow { color: var(--muted); }
+    pre {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.72rem;
+      line-height: 1.5;
+      overflow: auto;
+      background: #080c12;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+      margin: 0;
+    }
+    .label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.5rem; }
+    .authority {
+      margin-top: 1rem;
+      padding: 1rem;
+      border-left: 3px solid var(--accent);
+      background: #0a100c;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>Causal walkthrough</h1>
+  <p class="sub">
+    Public semantics visualization — event → lineage → replay candidate → authority → ingest outcome.
+    Data from <a href="../golden/runtime_event_v1/" style="color: var(--accent)">golden fixtures</a>.
+  </p>
+  <div class="layout">
+    <div class="steps" id="steps"></div>
+    <div class="viz">
+      <div class="flow" id="flow"></div>
+      <div class="label">Envelope</div>
+      <pre id="json"></pre>
+      <div class="authority" id="authority"></div>
+    </div>
+  </div>
+  <script>
+    const SCENARIOS = [
+      {
+        id: 'tool',
+        title: '1. Accepted — deterministic tool',
+        flow: ['event', 'lineage', 'replay_hash', 'authority', 'accepted'],
+        json: {
+          event_id: 'evt_golden_tool_001',
+          type: 'TOOL_INVOKED',
+          causal_parent: null,
+          replay_hash: 'db2a244792c8f4c20e1f7189c946ad37',
+          replay_candidate: true,
+          runtime_state: 'operational',
+          epistemic_state: 'deterministic',
+          authority: { decision: 'deterministic_execute' }
+        },
+        authority: 'Materialized: operational · replay PASS · decision deterministic_execute'
+      },
+      {
+        id: 'chat',
+        title: '2. Accepted — LLM child event',
+        flow: ['event', 'lineage', 'replay_hash', 'authority', 'accepted'],
+        json: {
+          event_id: 'evt_golden_chat_002',
+          type: 'AI_CHAT_COMPLETED',
+          causal_parent: 'evt_golden_tool_001',
+          replay_hash: '68189ecf94d2ad755bc3ca7a7c7b1d42',
+          llm_invoked: true,
+          authority: { decision: 'invoke_llm' }
+        },
+        authority: 'Child lineage valid · inference exceptional path used · replay_candidate true'
+      },
+      {
+        id: 'reject',
+        title: '3. Rejected — malformed replay_hash',
+        flow: ['event', 'replay_hash', 'rejected'],
+        json: {
+          event_id: 'evt_golden_reject_001',
+          replay_hash: 'short',
+          _expected_ingest: 'rejected',
+          _expected_reason: 'malformed_replay_hash'
+        },
+        authority: 'Not on timeline — recorded in rejected.jsonl'
+      },
+      {
+        id: 'quarantine',
+        title: '4. Quarantined — orphan parent',
+        flow: ['event', 'lineage', 'quarantine'],
+        json: {
+          event_id: 'evt_golden_quarantine_001',
+          causal_parent: 'evt_does_not_exist',
+          _expected_ingest: 'quarantined',
+          _expected_reason: 'orphan_causal_parent'
+        },
+        authority: 'Invalid ≠ nonexistent — auditable in quarantine.jsonl'
+      },
+      {
+        id: 'reuse',
+        title: '5. Replay reuse — same intent hash',
+        flow: ['event', 'replay_hash', 'reuse', 'authority'],
+        json: {
+          note: 'Same intent as tool event → same replay_hash',
+          replay_hash: 'db2a244792c8f4c20e1f7189c946ad37',
+          replay_candidate: true,
+          authority: { decision: 'reuse_replay' }
+        },
+        authority: 'Inference gate may skip LLM — causal capital reused'
+      }
+    ];
+
+    const flowLabels = {
+      event: 'runtime_event_v1',
+      lineage: 'lineage',
+      replay_hash: 'replay_hash',
+      authority: 'authority (derived)',
+      accepted: 'accepted',
+      rejected: 'rejected',
+      quarantine: 'quarantined',
+      reuse: 'replay reuse'
+    };
+
+    let active = 0;
+    const stepsEl = document.getElementById('steps');
+    const flowEl = document.getElementById('flow');
+    const jsonEl = document.getElementById('json');
+    const authEl = document.getElementById('authority');
+
+    function render(i) {
+      active = i;
+      const s = SCENARIOS[i];
+      stepsEl.querySelectorAll('.step-btn').forEach((b, j) => b.classList.toggle('active', j === i));
+      flowEl.innerHTML = s.flow.map((k, idx) => {
+        const cls = k === 'rejected' ? 'bad' : k === 'quarantine' ? 'warn' : k === 'reuse' ? 'on' : 'on';
+        const arrow = idx < s.flow.length - 1 ? '<span class="arrow">→</span>' : '';
+        return `<span class="node ${cls}">${flowLabels[k] || k}</span>${arrow}`;
+      }).join('');
+      jsonEl.textContent = JSON.stringify(s.json, null, 2);
+      authEl.textContent = s.authority;
+    }
+
+    SCENARIOS.forEach((s, i) => {
+      const b = document.createElement('button');
+      b.className = 'step-btn' + (i === 0 ? ' active' : '');
+      b.textContent = s.title;
+      b.onclick = () => render(i);
+      stepsEl.appendChild(b);
+    });
+    render(0);
+  </script>
+</body>
+</html>

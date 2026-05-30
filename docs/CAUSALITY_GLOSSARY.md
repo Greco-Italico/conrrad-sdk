@@ -1,5 +1,7 @@
 # Causality Glossary v0
 
+> **Institutional semantic kernel (handbook):** [`../../docs/handbook/GLOSSARY.md`](../../docs/handbook/GLOSSARY.md) — normative · prohibited · invalid equivalences across handbook/runtime/SDK.
+
 | Term | Definition | Primary Evidence |
 |------|------------|------------------|
 | Habitat | Sovereign runtime boundary with identity, ledger, authority | `identity` API + habitat files |

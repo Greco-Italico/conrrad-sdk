@@ -1,0 +1,30 @@
+name: Documentation governance
+
+on:
+  pull_request:
+    paths:
+      - 'conrrad_sdk/**'
+      - 'kernell_sdk/**'
+      - 'kap_escrow/**'
+      - 'pyproject.toml'
+      - 'docs/**'
+      - 'CHANGELOG.md'
+  push:
+    branches: [main]
+    paths:
+      - 'conrrad_sdk/**'
+      - 'docs/**'
+
+jobs:
+  docs-governance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Check docs accompany surface changes
+        run: bash scripts/check-docs-governance.sh
+        env:
+          DOCS_GOV_BASE_REF: ${{ github.event.pull_request.base.sha || 'HEAD~1' }}
+      - name: Verify golden replay_hash fixtures
+        run: python3 scripts/verify_golden_replay_hash.py

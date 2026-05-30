@@ -1,0 +1,30 @@
+{
+  "_fixture": "golden_documentation_v1",
+  "_description": "Canonical three-event lineage — ingest in order",
+  "events": [
+    {
+      "event_id": "evt_golden_tool_001",
+      "causal_parent": null,
+      "replay_hash": "db2a244792c8f4c20e1f7189c946ad37",
+      "type": "TOOL_INVOKED"
+    },
+    {
+      "event_id": "evt_golden_chat_002",
+      "causal_parent": "evt_golden_tool_001",
+      "replay_hash": "68189ecf94d2ad755bc3ca7a7c7b1d42",
+      "type": "AI_CHAT_COMPLETED"
+    },
+    {
+      "event_id": "evt_golden_tool_003",
+      "causal_parent": "evt_golden_chat_002",
+      "replay_hash": "db2a244792c8f4c20e1f7189c946ad37",
+      "type": "TOOL_INVOKED",
+      "_note": "same intent as 001 → same replay_hash (reuse candidate)"
+    }
+  ],
+  "invariants": [
+    "LN-G1: append-only",
+    "LN-G2: parent must exist or quarantine",
+    "RH-G1: same intent → same replay_hash"
+  ]
+}

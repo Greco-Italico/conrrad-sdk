@@ -1,0 +1,44 @@
+{
+  "_fixture": "golden_documentation_v1",
+  "_expected_ingest": "accepted",
+  "_replay_hash_expected": "68189ecf94d2ad755bc3ca7a7c7b1d42",
+  "event_id": "evt_golden_chat_002",
+  "timestamp": "2026-05-29T12:01:00.000Z",
+  "session_id": "sess_golden",
+  "type": "AI_CHAT_COMPLETED",
+  "source": "llm",
+  "trace_id": "tr_golden_002",
+  "epoch_id": "epoch_golden_1",
+  "lineage_id": "lin_golden_mission",
+  "causal_parent": "evt_golden_tool_001",
+  "replay_hash": "68189ecf94d2ad755bc3ca7a7c7b1d42",
+  "runtime_state": "operational",
+  "epistemic_state": "bounded_uncertainty",
+  "authority": {
+    "authority_state": "allowed",
+    "policy_version": "2026-05-28",
+    "freeze_active": true,
+    "decision": "invoke_llm"
+  },
+  "semantic": {
+    "namespace_layer": "L2",
+    "legacy": false,
+    "registry_asset_id": null
+  },
+  "confidence": 0.85,
+  "llm_invoked": true,
+  "model": {
+    "provider": "groq",
+    "model_id": "llama-3.3-70b",
+    "tier": "premium"
+  },
+  "economics": {
+    "cost_usd": 0.002,
+    "token_usage": 120
+  },
+  "replay_candidate": true,
+  "payload": {
+    "intent": "explain_replay_hash",
+    "outcome": "success"
+  }
+}

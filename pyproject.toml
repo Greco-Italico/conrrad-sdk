@@ -1,11 +1,10 @@
 [build-system]
 requires = ["maturin>=1.0,<2.0"]
 build-backend = "maturin"
-
 [project]
-name = "conrrad-sdk"
-version = "2.0.0"
-description = "CONRRAD SDK — Governed causal runtime for persistent cognitive systems. Public SDK surface of CONRRAD sovereign operational infrastructure."
+name = "kap-escrow"
+version = "1.2.1"
+description = "KAP escrow for agent habitats — public SDK surface of CONRRAD sovereign operational infrastructure (runtime governance; inference exceptional)."
 readme = "README.md"
 license = {text = "MIT"}
 requires-python = ">=3.9"
@@ -13,17 +12,17 @@ authors = [
     {name = "CONRRAD", email = "protocol@conrrad.dev"}
 ]
 keywords = [
-    "ai", "agents", "runtime", "cognitive", "continuity",
-    "governance", "causal", "observability", "conrrad",
+    "ai", "agents", "escrow", "a2a", "ap2", "merkle", "protocol",
+    "blockchain", "transactions", "trustless", "agent-to-agent",
 ]
 classifiers = [
-    "Development Status :: 4 - Beta",
+    "Development Status :: 5 - Production/Stable",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
-    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Security :: Cryptography",
     "Topic :: Software Development :: Libraries :: Python Modules",
-    "Topic :: System :: Monitoring",
+    "Topic :: Office/Business :: Financial",
 ]
 dependencies = [
     "redis>=4.0.0",
@@ -31,15 +30,10 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://conrrad.online"
+Homepage = "https://conrrad.dev"
 Repository = "https://github.com/Greco-Italico/conrrad-sdk"
-Documentation = "https://conrrad.online/docs"
+Documentation = "https://conrrad.dev/docs"
 "Bug Tracker" = "https://github.com/Greco-Italico/conrrad-sdk/issues"
-
-[project.optional-dependencies]
-# Legacy compatibility — users who had kap-escrow can install conrrad-sdk
-# and get the same functionality.
-legacy = []
 
 [tool.maturin]
 features = ["pyo3/extension-module"]

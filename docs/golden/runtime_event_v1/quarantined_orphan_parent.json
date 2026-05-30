@@ -1,0 +1,35 @@
+{
+  "_fixture": "golden_documentation_v1",
+  "_expected_ingest": "quarantined",
+  "_expected_reason": "orphan_causal_parent",
+  "event_id": "evt_golden_quarantine_001",
+  "timestamp": "2026-05-29T12:03:00.000Z",
+  "session_id": "sess_golden",
+  "type": "TOOL_INVOKED",
+  "source": "sdk_agent",
+  "trace_id": "tr_golden_004",
+  "epoch_id": "epoch_golden_1",
+  "lineage_id": "lin_golden_mission",
+  "causal_parent": "evt_does_not_exist",
+  "replay_hash": "db2a244792c8f4c20e1f7189c946ad37",
+  "runtime_state": "operational",
+  "epistemic_state": "deterministic",
+  "authority": {
+    "authority_state": "allowed",
+    "policy_version": "2026-05-28",
+    "freeze_active": true,
+    "decision": "deterministic_execute"
+  },
+  "semantic": {
+    "namespace_layer": "L2",
+    "legacy": false,
+    "registry_asset_id": null
+  },
+  "confidence": 1.0,
+  "llm_invoked": false,
+  "payload": {
+    "tool": "read_file",
+    "path": "README.md",
+    "intent": "read_file"
+  }
+}

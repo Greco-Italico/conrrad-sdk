@@ -1,0 +1,36 @@
+{
+  "_fixture": "golden_documentation_v1",
+  "_expected_ingest": "accepted",
+  "_replay_hash_expected": "db2a244792c8f4c20e1f7189c946ad37",
+  "event_id": "evt_golden_tool_001",
+  "timestamp": "2026-05-29T12:00:00.000Z",
+  "session_id": "sess_golden",
+  "type": "TOOL_INVOKED",
+  "source": "sdk_agent",
+  "trace_id": "tr_golden_001",
+  "epoch_id": "epoch_golden_1",
+  "lineage_id": "lin_golden_mission",
+  "causal_parent": null,
+  "replay_hash": "db2a244792c8f4c20e1f7189c946ad37",
+  "runtime_state": "operational",
+  "epistemic_state": "deterministic",
+  "authority": {
+    "authority_state": "allowed",
+    "policy_version": "2026-05-28",
+    "freeze_active": true,
+    "decision": "deterministic_execute"
+  },
+  "semantic": {
+    "namespace_layer": "L2",
+    "legacy": false,
+    "registry_asset_id": null
+  },
+  "confidence": 1.0,
+  "llm_invoked": false,
+  "replay_candidate": true,
+  "payload": {
+    "tool": "read_file",
+    "path": "README.md",
+    "intent": "read_file"
+  }
+}

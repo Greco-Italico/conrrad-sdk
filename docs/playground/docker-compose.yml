@@ -1,0 +1,14 @@
+# Optional local dependencies for SDK playground — not full CONRRAD runtime
+services:
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - conrrad_playground_redis:/data
+
+  # Ollama: install on host for GPU access — https://ollama.com
+  # Then: export OLLAMA_HOST=http://127.0.0.1:11434
+
+volumes:
+  conrrad_playground_redis:

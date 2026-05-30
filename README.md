@@ -5,10 +5,13 @@
 | Resource | URL |
 |----------|-----|
 | Website | https://conrrad.online |
-| Public docs | https://conrrad.online/docs/ |
+| **Developer documentation (SSOT)** | [**docs/README.md**](docs/README.md) · [conrrad.online/docs/developer/](https://conrrad.online/docs/developer/) |
+| Public institutional docs | https://conrrad.online/docs/ |
 | Infrastructure thesis | https://conrrad.online/docs/CONRRAD_THESIS |
 | Operational inference gate | https://conrrad.online/docs/OPERATIONAL_INFERENCE_GATE |
 | This repo | https://github.com/Greco-Italico/conrrad-sdk |
+
+> **Documentation is operational infrastructure.** SDK changes without doc updates are invalid — see [`docs/DOCS_GOVERNANCE.md`](docs/DOCS_GOVERNANCE.md).
 
 > **Open core:** this repository is the **public SDK surface** for CONRRAD (`conrrad-sdk` on PyPI — migrating from legacy `kap-escrow`). Full runtime, orchestrator, and HARLEMM live in the private `conrrad` implementation. Do not use “KAP” or “Kernell” in new public copy.
 
